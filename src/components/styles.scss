@@ -1,0 +1,70 @@
+.select-wrapper {
+    width: 100%;
+    max-width: 300px;
+    margin: 32px;
+
+    .input-wrapper {
+        display: flex;
+        border-radius: 8px;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px;
+        height: 42px;
+        background-color: #ffff;
+
+        .select-input {
+            border: none;
+            outline: none;
+            height: 100%;
+        }
+    }
+
+    .items-wrapper {
+        display: none;
+        border-radius: 8px;
+        margin-top: 8px;
+        background-color: #ffff;
+        width: 100%;
+        padding: 8px 0;
+        max-height: 300px;
+        overflow-x: auto;
+
+        &.--show {
+            display: inline-block;
+        }
+
+        .not-found {
+            padding: 0 8px;
+            color: rgba(129, 124, 124, 0.933);
+        }
+
+        .select-item {
+            cursor: pointer;
+            padding: 8px 16px;
+            display: grid;
+            align-items: center;
+            grid-template-columns: 16px 1fr;
+            grid-template-areas: 'check-icon title';
+            gap: 4px;
+
+            &:hover {
+                background-color: rgb(13, 148, 136);
+                color: #fff;
+            }
+
+            .check-icon {
+                grid-area: check-icon;
+            }
+
+            .item-title {
+                grid-area: title;
+                font-size: 14px;
+
+                &.--selected {
+                    font-weight: 700;
+                    font-size: 15px;
+                }
+            }
+        }
+    }
+}
