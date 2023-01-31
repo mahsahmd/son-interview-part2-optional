@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 const useGetData = () => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState('');
 
     useEffect(() => {
         fetch("https://dummyjson.com/products")
@@ -11,14 +12,17 @@ const useGetData = () => {
                     return res.json()
                 }
                 else {
-                    throw new Error('Request failed')
+                    setError('failed to fetch data')
                 }
             }).then((data) => {
                 setData(data?.products)
                 setLoading(false)
-            }).catch(err => console.error(err))
+            }).catch(err => {
+                console.error(err);
+                setError('failed to fetch data');
+            })
     }, [])
-    return { data, loading }
+    return { data, loading, error }
 }
 
 export default useGetData

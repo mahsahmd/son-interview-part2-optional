@@ -5,7 +5,7 @@ import SelectItem from './SelectItem';
 import { MdKeyboardArrowDown } from 'react-icons/md'
 import "./styles.scss";
 const SelectBox = () => {
-    const { data, loading } = useGetData();
+    const { data, loading, error } = useGetData();
     const [filteredData, setFilteredData] = useState([]);
     const [value, setvalue] = useState("");
     const [displayItems, setDisplayItems] = useState(false);
@@ -56,6 +56,9 @@ const SelectBox = () => {
                     })) :
                     <p className='not-found'>Nothing Found</p>}
             </div>
+            {error && (
+                <p className='error-message'>{error}</p>
+            )}
 
         </div>
     )
