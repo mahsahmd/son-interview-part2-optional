@@ -6,7 +6,7 @@ import { MdKeyboardArrowDown } from 'react-icons/md'
 import "./styles.scss";
 const SelectBox = () => {
     const { data, loading } = useGetData();
-    const [filteredData, setFilteredData] = useState();
+    const [filteredData, setFilteredData] = useState([]);
     const [value, setvalue] = useState("");
     const [displayItems, setDisplayItems] = useState(false);
     const boxRef = useRef();
@@ -14,14 +14,21 @@ const SelectBox = () => {
     const [selectedValue, setSelectedValue] = useState("");
 
     useEffect(() => {
-        setDisplayItems(false)
+        /**if the user clicks outside of the select hide the item's list */
+        if (isClickedOutside) {
+            setDisplayItems(false)
+
+        }
+        /**if the inputed value is not found set the input value the last selected item */
         if (filteredData?.length === 0 && data?.length > 0) {
             setvalue(selectedValue)
         }
     }, [isClickedOutside])
 
+
     useEffect(() => {
         setFilteredData(data);
+        /**when data is fetched completely set the default value of input and selectedItem to the first item in our data*/
         if (data && data?.length > 0 && !loading) {
             setvalue(data?.[0]?.title);
             setSelectedValue(data?.[0]?.title);
@@ -29,6 +36,7 @@ const SelectBox = () => {
     }, [loading])
 
     const onInputChange = (e) => {
+        /**when user starts typing filter the data and show the item's list */
         const value = e.target.value;
         setDisplayItems(true)
         setvalue(value)
